@@ -8,3 +8,4 @@ matplotlib
 scipy
 langchain-google-genai
 Pillow
+python-multipart
