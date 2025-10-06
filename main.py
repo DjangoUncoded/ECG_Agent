@@ -15,7 +15,7 @@ import matplotlib
 
 matplotlib.use("Agg")  # Use non-GUI backend for servers
 import matplotlib.pyplot as plt
-from scipy.signal import butter, filtfilt, find_peaks
+from scipy.signal import butter, filtfilt, find_peaks,iirnotch
 
 # Load environment variables (for API key)
 load_dotenv()
@@ -39,9 +39,11 @@ app = FastAPI()
 
 # --- ECG Analysis Parameters ---
 
-LOWCUT, HIGCUT, ORDER = 0.5, 40.0, 3
+LOWCUT, HIGHCUT, ORDER = 0.5, 100.0, 5
 
-
+def notch_filter(signal, notch_freq, fs, Q=30):
+    b, a = iirnotch(notch_freq, Q, fs)
+    return filtfilt(b, a, signal)
 # --- Processing Functions ---
 def butter_bandpass(lowcut, highcut, fs, order=4):
     nyq = 0.5 * fs
@@ -76,7 +78,8 @@ def analyze_ecg_file(file_path, fs=None):
     time = np.arange(n_samples) / fs
 
     # Filter ECG
-    filtered = bandpass_filter(signal, LOWCUT, HIGCUT, fs, ORDER)
+    filtered_0 = bandpass_filter(signal, LOWCUT, HIGHCUT, fs, ORDER)
+    filtered = notch_filter(filtered_0, notch_freq=50.0, fs=fs)
 
     # Peak detection
     diffed = np.ediff1d(filtered, to_begin=0)
