@@ -5,7 +5,7 @@ import numpy as np
 import io
 import os
 from dotenv import load_dotenv
-from PIL import Image
+
 from fastapi import FastAPI, UploadFile, File
 from fastapi.responses import JSONResponse
 from fastapi.templating import Jinja2Templates

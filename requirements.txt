@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+jinja2
+python-dotenv
+pandas
+numpy
+matplotlib
+scipy
+langchain-google-genai
+Pillow
