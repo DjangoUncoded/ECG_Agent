@@ -156,7 +156,7 @@ async def analyze_ecg(file: UploadFile = File(...)):
         **The summary must be very brief.**
 
         **Format your response using simple Markdown.** Use '##' for main headings and '**' for bolding key terms.
-        Start with a '## Summary' section, then a '## Heart Rate Variability (HRV) Metrics' section. Under the HRV section, briefly explain each metric,also in easy terms which is understandable to all audience and provide a suggestion if needed,pretent you are a doctor.
+        Start with a '## Summary' section, then a '## Heart Rate Variability (HRV) Metrics' section. Under the HRV section, briefly explain each metric,also in easy terms which is understandable to all audience and provide a suggestion if needed,act as a ecg analyst AI agent.
 
         - **Detected Beats:** {result['beats']}
         - **Mean Heart Rate (HR):** {result['mean_hr']} bpm
