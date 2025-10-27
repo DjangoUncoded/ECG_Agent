@@ -39,7 +39,7 @@ app = FastAPI()
 
 # --- ECG Analysis Parameters ---
 
-LOWCUT, HIGHCUT, ORDER = 0.5, 100.0, 5
+LOWCUT, HIGHCUT, ORDER = 5, 15.0, 5
 
 def notch_filter(signal, notch_freq, fs, Q=30):
     b, a = iirnotch(notch_freq, Q, fs)
